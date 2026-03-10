@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Student {
+  id             Int         @id @default(autoincrement())
+  user           String
+  service        String
+  telegramChatId String
+  messages       DbMessage[]
+
+  @@unique([user, service])
+}
+
+model DbMessage {
+  id             String  @id
+  title          String
+  body           String
+  date           String
+  sender         String
+  raw            String
+  hasAttachments Boolean
+  sentToTelegram Boolean @default(false)
+  studentId      Int
+  student        Student @relation(fields: [studentId], references: [id])
+}
