@@ -20,6 +20,7 @@ export class TelegramNotifier implements MessageNotifier {
     const lines = [
       `<b>📬 Nuevo mensaje en Autogestión</b>`,
       ``,
+      `<b>🎓 Clase:</b> ${this.escapeHtml(msg.class || 'No especificada')}`,
       `<b>👤 De:</b> ${this.escapeHtml(msg.sender)}`,
       `<b>📅 Fecha:</b> ${this.escapeHtml(msg.date)}`,
       `<b>📌 Asunto:</b> ${this.escapeHtml(msg.title)}`,

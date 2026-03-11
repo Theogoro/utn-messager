@@ -85,6 +85,7 @@ export class PlaywrightMessageFetcher implements MessageFetcher {
           const hasAttachments = !!el.querySelector(".archivosDescarga");
           const bodyEl = el.querySelector(hasAttachments ? "table > tbody > tr:nth-child(2) > td" : ".timeline-body");
           const senderEl = el.querySelector(".timeline-header a, .timeline-header strong");
+          const classEl = el.querySelector(".alcance");
 
           return {
             id: el.getAttribute("id") ?? "",
@@ -94,6 +95,7 @@ export class PlaywrightMessageFetcher implements MessageFetcher {
             sender: senderEl?.textContent?.trim() ?? "",
             raw,
             hasAttachments,
+            class: classEl?.textContent?.trim() ?? ""
           };
         });
       }

@@ -18,6 +18,7 @@ export class PrismaMessageRepository implements MessageRepository {
           sender: msg.sender,
           raw: msg.raw,
           hasAttachments: msg.hasAttachments,
+          class: msg.class,
           sentToTelegram: false,
           studentId,
         },
@@ -39,6 +40,7 @@ export class PrismaMessageRepository implements MessageRepository {
       sender: row.sender,
       raw: row.raw,
       hasAttachments: row.hasAttachments,
+      class: row.class,
     }));
   }
 

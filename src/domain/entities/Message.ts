@@ -6,4 +6,5 @@ export interface Message {
   sender: string;
   raw: string;
   hasAttachments: boolean;
+  class: string;
 }

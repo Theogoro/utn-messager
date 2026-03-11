@@ -25,6 +25,7 @@ model DbMessage {
   sender         String
   raw            String
   hasAttachments Boolean
+  class          String
   sentToTelegram Boolean @default(false)
   studentId      Int
   student        Student @relation(fields: [studentId], references: [id])

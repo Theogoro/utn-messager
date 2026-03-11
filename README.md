@@ -71,6 +71,34 @@ pm2 save
 pm2 startup
 ```
 
+### Database Updates in Production
+
+When making changes to the `schema.prisma` file, you should not use `npx prisma db push` or `prisma migrate dev` on your production server. Instead, follow these steps to deploy database changes:
+
+1. **Commit your migrations locally:**
+   Run `npm run db:migrate` on your development machine to create the migration files and commit the `prisma/migrations` folder to Git.
+
+2. **Pull the changes onto your server.**
+
+3. **Deploy the migration:**
+   Run the following command safely on your server to sync the database with the migrations:
+   ```bash
+   npm run db:deploy
+   ```
+
+4. **Regenerate the Prisma Client:**
+   Ensure the Prisma client reflects your new schema:
+   ```bash
+   npm run db:generate
+   ```
+
+5. **Restart the Bot Daemon:**
+   If you have a PM2 process running, restart it to load the updated Prisma Client into memory:
+   ```bash
+   npm run pm2:restart 
+   # or npm run pm2:stop && npm run pm2:start
+   ```
+
 ## Architecture Notes
 - **Playwright** is used because the Autogestión platform relies on heavy Client-Side Rendering (Angular), requiring an actual browser context rather than simple cURL/Axios scraping.
 - **Hexagonal Architecture** separates the infrastructure (Prisma, Telegram API, Playwright) from the business logic (Entities and UseCases).
